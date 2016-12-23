@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F4B9601C-563F-4ED7-8A50-BD5B940266D5}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CQRS.Commands.Implementation</RootNamespace>
+    <AssemblyName>CQRS.Commands.Implementation</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.ServiceBus, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WindowsAzure.ServiceBus.3.4.3\lib\net45-full\Microsoft.ServiceBus.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AzureCommandQueue.cs" />
+    <Compile Include="CommandDispatcher.cs" />
+    <Compile Include="CommandFactory.cs" />
+    <Compile Include="Exceptions\CommandDispatchException.cs" />
+    <Compile Include="Handlers\CommandHandlerBase.cs" />
+    <Compile Include="Handlers\MessageUserCommandHandler.cs" />
+    <Compile Include="Handlers\FinishTaskCommandHandler.cs" />
+    <Compile Include="Handlers\LeaveCommentCommandHandler.cs" />
+    <Compile Include="Handlers\TakeTaskCommandHandler.cs" />
+    <Compile Include="Handlers\UserLogoutCommandHandler.cs" />
+    <Compile Include="Handlers\UserLoginCommandHandler.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CQRS.Commands.Interfaces\CQRS.Commands.Interfaces.csproj">
+      <Project>{9E863C04-44EF-4861-B1B3-CF399189BA3E}</Project>
+      <Name>CQRS.Commands.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CQRS.Commands.Models\CQRS.Commands.Models.csproj">
+      <Project>{9B99483D-3F95-4EB2-8A48-7CC67B328824}</Project>
+      <Name>CQRS.Commands.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DL.Interfaces\DL.Interfaces.csproj">
+      <Project>{D44105C7-EC4B-41D2-814B-5369F7641F7C}</Project>
+      <Name>DL.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DL.Models\DL.Models.csproj">
+      <Project>{abe173c7-14a0-4d84-8880-92bbb43229ec}</Project>
+      <Name>DL.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Enums\Enums.csproj">
+      <Project>{db314c78-ed9a-461f-acbc-abbe7f700f98}</Project>
+      <Name>Enums</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
